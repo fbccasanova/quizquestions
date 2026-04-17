@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #05472A; /* Matching your previous theme */
+            background-color: #05472A;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
@@ -16,104 +16,58 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            color: white;
         }
 
         .quiz-card {
             background-color: #1a2a6c; /* Navy Blue */
-            padding: 40px;
+            padding: 30px;
             border-radius: 24px;
-            box-shadow: 12px 12px 0px #c1ff72; /* Electric Lime */
+            box-shadow: 10px 10px 0px #c1ff72; /* Electric Lime */
             text-align: center;
-            max-width: 500px;
+            max-width: 450px;
             width: 100%;
             border: 4px solid #4a4a4a;
         }
 
-        h1 {
-            color: #c1ff72;
-            font-size: 32px;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
+        h1 { color: #c1ff72; font-size: 28px; margin-bottom: 20px; letter-spacing: 2px; }
 
-        .question-container {
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .question-container { min-height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+        .question { font-size: 20px; line-height: 1.4; font-weight: 400; }
 
-        .question {
-            color: #ffffff;
-            font-size: 22px;
-            margin-bottom: 35px;
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        .options {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
+        .options { display: flex; gap: 15px; justify-content: center; }
 
         .btn {
             background-color: #c1ff72;
             color: #1a2a6c;
             border: none;
-            padding: 18px 35px;
+            padding: 15px 30px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: 18px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
             box-shadow: 0px 4px 0px #4a4a4a;
-            min-width: 140px;
+            flex: 1;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0px 7px 0px #4a4a4a;
-            background-color: #ffffff;
-        }
+        .btn:active { transform: translateY(2px); box-shadow: 0px 2px 0px #4a4a4a; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .btn:active {
-            transform: translateY(2px);
-            box-shadow: 0px 2px 0px #4a4a4a;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0px 4px 0px #4a4a4a;
-        }
-
-        #feedback {
-            margin-top: 30px;
-            font-size: 22px;
-            font-weight: 800;
-            min-height: 33px;
-            text-transform: uppercase;
-        }
-
+        #feedback { margin-top: 25px; font-size: 20px; font-weight: 800; text-transform: uppercase; min-height: 30px; }
         .correct { color: #c1ff72; }
         .wrong { color: #ff0503; }
 
-        /* Verification Styling */
         .verification {
-            margin-top: 50px;
+            margin-top: 30px;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 12px;
-            max-width: 600px;
+            max-width: 450px;
             font-size: 13px;
-            color: #e0e0e0;
-            font-family: sans-serif;
-            line-height: 1.4;
+            border-left: 5px solid #c1ff72;
         }
-        .verification h2 { font-size: 16px; margin-top: 0; color: #c1ff72; }
+        .verification h2 { font-size: 16px; margin: 0 0 10px 0; color: #c1ff72; }
     </style>
 </head>
 <body>
@@ -135,56 +89,35 @@
     <div class="verification">
         <h2>Fact Check & Sources</h2>
         <div id="fact-source">
-            Choose an answer to see the nutritional science behind the question.
+            Answer the question to unlock the nutritional science behind it!
         </div>
     </div>
 
     <script>
-        // Verified database of health and nutrition facts
         const quizData = [
-            {
-                q: "Fresh vegetables are always healthier than frozen vegetables.",
-                a: false,
-                fact: "Frozen vegetables are flash-frozen at peak ripeness, locking in vitamins. Fresh produce can lose nutrients during long transport times.",
-                source: "Source: Mayo Clinic / Healthline"
-            },
-            {
-                q: "Drinking water helps boost your metabolism.",
-                a: true,
-                fact: "Drinking water can temporarily increase the amount of calories you burn, known as resting energy expenditure.",
-                source: "Source: Journal of Clinical Endocrinology and Metabolism"
-            },
-            {
-                q: "Brown sugar is significantly healthier than white sugar.",
-                a: false,
-                fact: "Brown sugar is just white sugar with molasses added. The nutritional difference is negligible; both affect blood sugar similarly.",
-                source: "Source: American Heart Association"
-            },
-            {
-                q: "Eggs increase your risk of heart disease due to high cholesterol.",
-                a: false,
-                fact: "For most people, dietary cholesterol in eggs has a small effect on blood cholesterol levels compared to trans fats and saturated fats.",
-                source: "Source: Harvard T.H. Chan School of Public Health"
-            },
-            {
-                q: "Carrots significantly improve night vision.",
-                a: false,
-                fact: "While Vitamin A in carrots is vital for eye health, eating extra won't give you 'super' night vision unless you had a deficiency.",
-                source: "Source: Scientific American"
-            },
-            {
-                q: "Standard table salt and sea salt contain the same amount of sodium.",
-                a: true,
-                fact: "By weight, both contain about 40% sodium. Sea salt is often less processed but isn't 'low sodium'.",
-                source: "Source: American Heart Association"
-            }
+            { q: "Fresh vegetables are always healthier than frozen vegetables.", a: false, fact: "Frozen veggies are flash-frozen at peak ripeness, locking in vitamins.", source: "Source: Mayo Clinic" },
+            { q: "Drinking water helps boost your metabolism.", a: true, fact: "Water intake temporarily increases calories burned via thermogenesis.", source: "Source: Healthline" },
+            { q: "Brown sugar is significantly healthier than white sugar.", a: false, fact: "Brown sugar is white sugar with molasses; nutritional difference is tiny.", source: "Source: AHA" },
+            { q: "Standard table salt and sea salt contain the same amount of sodium.", a: true, fact: "By weight, both are about 40% sodium.", source: "Source: American Heart Association" },
+            { q: "Eggs increase your risk of heart disease due to cholesterol.", a: false, fact: "Dietary cholesterol has minimal impact on blood cholesterol for most people.", source: "Source: Harvard Health" },
+            { q: "Carrots significantly improve night vision.", a: false, fact: "Vitamin A helps eyes, but extra carrots won't give you 'super' vision.", source: "Source: Scientific American" },
+            { q: "Celery has 'negative calories'.", a: false, fact: "While very low in calories, the energy to digest it is less than the celery provides.", source: "Source: BBC Good Food" },
+            { q: "Multigrain bread is always the same as whole wheat bread.", a: false, fact: "Multigrain just means 'many grains'; it may still be refined white flour.", source: "Source: WebMD" },
+            { q: "Skipping breakfast leads to weight gain.", a: false, fact: "Weight loss depends on total daily calories, not the timing of the first meal.", source: "Source: Medical News Today" },
+            { q: "Natural sugar in fruit is different than added white sugar.", a: true, fact: "Fruit contains fiber which slows sugar absorption and prevents spikes.", source: "Source: Healthline" },
+            { q: "Detox teas and juices are necessary to cleanse the body.", a: false, fact: "Your liver and kidneys perform all the 'detoxing' your body needs.", source: "Source: NIH" },
+            { q: "Gluten-free diets are healthier for everyone.", a: false, fact: "Unless you have Celiac disease or sensitivity, gluten-free is not inherently 'healthier'.", source: "Source: Johns Hopkins Medicine" },
+            { q: "Eating fat makes you fat.", a: false, fact: "Excess calories make you fat; healthy fats are essential for hormone health.", source: "Source: Cleveland Clinic" },
+            { q: "Fruit juice is as healthy as eating whole fruit.", a: false, fact: "Juicing removes the fiber, leading to much faster blood sugar spikes.", source: "Source: Nutrition.org" },
+            { q: "White meat is always healthier than dark meat.", a: false, fact: "Dark meat contains more iron and zinc; the calorie difference is small.", source: "Source: USDA" }
         ];
 
         let currentQuestion = null;
 
-        function loadRandomQuestion() {
-            const randomIndex = Math.floor(Math.random() * quizData.length);
-            currentQuestion = quizData[randomIndex];
+        function initQuiz() {
+            // Shuffle the entire array so the play order is different every time
+            const shuffled = quizData.sort(() => 0.5 - Math.random());
+            currentQuestion = shuffled[0];
             document.getElementById('question-text').textContent = currentQuestion.q;
         }
 
@@ -193,22 +126,20 @@
             const factSource = document.getElementById('fact-source');
             const buttons = document.querySelectorAll('.choice-btn');
 
-            // Disable buttons after answer
             buttons.forEach(btn => btn.disabled = true);
 
             if (userChoice === currentQuestion.a) {
-                feedback.innerHTML = "✓ CORRECT! move 1 space!";
+                feedback.innerHTML = "✓ CORRECT!";
                 feedback.className = "correct";
             } else {
-                feedback.innerHTML = "✗ WRONG! next time!";
+                feedback.innerHTML = "✗ WRONG!";
                 feedback.className = "wrong";
             }
 
             factSource.innerHTML = `<strong>The Science:</strong> ${currentQuestion.fact}<br><br><small>${currentQuestion.source}</small>`;
         }
 
-        // Initialize with a random question on page load
-        window.onload = loadRandomQuestion;
+        window.onload = initQuiz;
     </script>
 </body>
 </html>
